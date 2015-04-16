@@ -1,0 +1,22 @@
+{
+    "Error.Passport.Password.Invalid": "The provided password is invalid!",
+    "Error.Passport.Password.Wrong": "Whoa, that password wasn't quite right!",
+    "Error.Passport.Password.NotSet": "Oh no, you haven't set a password yet!",
+    "Error.Passport.Username.NotFound": "Uhm, what's your name again?",
+    "Error.Passport.User.Exists": "This username is already taken.",
+    "Error.Passport.Email.NotFound": "That email doesn't seem right",
+    "Error.Passport.Email.Missing": "You need to supply an email-address for verification",
+    "Error.Passport.Email.Exists": "This email already exists. So try logging in.",
+    "Error.Passport.Username.Missing": "You need to supply a username",
+    "Error.Passport.Password.Missing": "Oh no, you haven't set a password yet!",
+    "Error.Passport.Generic": "Snap. Something went wrong with authorization.",
+    "Response.400": "Bad Request",
+    "Response.403": "Not Authorised",
+    "Response.403.Message": "You are not permitted to perform this action.",
+    "Response.404": "Not Found",
+    "Response.500": "Server Error",
+    "Error.isOwner": "Action can only be performed by the owner.",
+    "Error.Pagination.Invalid.Order": "Invalid order. Should be 'asc' or 'desc'.",
+    "Error.Pagination.Invalid.Sort": "Invalid sort attribute. Check meta.sortBy for sortable attributes.",
+    "Error.User.Find.BadRequest": "At least \"name\" or \"email\" parmater is required to search users."
+}

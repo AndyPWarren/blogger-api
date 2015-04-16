@@ -1,0 +1,33 @@
+[{
+    "activated": true,
+    "createdAt": "2014-09-05T12:00:00+00:00",
+    "email": "john@smith.com",
+    "firstName": "John",
+    "id": "1",
+    "lastName": "Smith",
+    "updatedAt": "2014-09-05T12:00:00+00:00"
+},{
+    "activated": true,
+    "createdAt": "2014-10-05T13:50:10+00:00",
+    "email": "john@doe.com",
+    "firstName": "John",
+    "id": "2",
+    "lastName": "Doe",
+    "updatedAt": "2014-10-05T13:50:10+00:00"
+},{
+     "activated": true,
+     "createdAt": "2014-10-05T13:50:10+00:00",
+     "email": "dave@smith.com",
+     "firstName": "Dave",
+     "id": "3",
+     "lastName": "Smith",
+     "updatedAt": "2014-10-05T13:50:10+00:00"
+},{
+    "activated": true,
+    "createdAt": "2014-10-05T13:50:10+00:00",
+    "email": "bob@henley.com",
+    "firstName": "Bob",
+    "id": "4",
+    "lastName": "Henley",
+    "updatedAt": "2014-10-05T13:50:10+00:00"
+}]

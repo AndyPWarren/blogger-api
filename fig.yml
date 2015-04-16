@@ -1,0 +1,11 @@
+web:
+  image: spectrakey/firstmate-api:develop
+  command: forever -w app.js
+  volumes:
+    - api:/app/api
+    - config:/app/config
+    - test:/app/test
+    - coverage:/app/coverage
+  ports:
+    - "1337:1337"
+    - "9000:9000"

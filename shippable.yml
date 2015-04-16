@@ -1,0 +1,56 @@
+#
+# FirstMate-API Shippable Build Config
+# Configuration for API build environment
+#
+
+# Language setting
+language: node_js
+
+# Node version
+node_js:
+  - 0.10
+
+# Specify the build_image
+build_image: shippableimages/ubuntu1404_nodejs
+
+# Setup docker and node.js environment
+before_install:
+  - source ~/.nvm/nvm.sh && nvm install $SHIPPABLE_NODE_VERSION
+  - node --version
+
+# Install the required dependencies
+install:
+  - npm install -g grunt-cli
+  - npm install
+
+env:
+  global:
+  - ORG=spectrakey PROJECT=firstmate-api
+  - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
+  - secure: N7PHNjeFUtwlMgrj2FZX8D+UIncIgU/U4qORsj1fzxqx4lYKwQUevs6URnjRSq6c/c+Tl3OQ0iOdaJXYmrdEdIjj6fWwh5oLXkkAEHazIEcS65gcEIBFqaVX5/BjeL2S3+pq5HF35GjjcIr+HJsNAlNrl4F97SubstbCW6rTZq/ig8+TE4XIYxDZ3rXA9AeDPnXbzoxdwFap56tXESbPmLO1VqpXDIlr5PbZMpbycjMtx+OxCbb0FhwN/FmRc3G9FD+yL+z6+3g1c0CNfTehUB3KjFmvLj4xrUm6S/+kz0ELP5LPyBw5cWZd9w3dZrsXCQaEx0Spds514B0yBB2XVg==
+
+# Setup report folders
+before_script:
+ - mkdir -p $CI_REPORTS
+ - mkdir -p $COVERAGE_REPORTS
+
+# Running npm test to run your test cases
+script:
+ - grunt build
+
+# Test coverage reports
+after_script:
+ - cp -R ./coverage/* $COVERAGE_REPORTS
+ - cp ./xunit.xml $CI_REPORTS
+ - cp -R ./docs  ./shippable/docs
+
+# Slack notifications
+after_failure:
+  - python ./tests/slack_notifier.py --project $PROJECT --org $ORG --token $SLACK_TOKEN
+after_success:
+  - python ./tests/slack_notifier.py --project $PROJECT --org $ORG --token $SLACK_TOKEN -s
+
+commit_container:
+  - jamesjwarren/firstmate-api
+
+archive: true

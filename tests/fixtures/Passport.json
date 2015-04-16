@@ -1,0 +1,13 @@
+[{
+    "password": "password",
+    "protocol": "local",
+    "user": 1
+},{
+    "password": "password",
+    "protocol": "local",
+    "user": 2
+},{
+    "password": "password",
+    "protocol": "local",
+    "user": 3
+}]
