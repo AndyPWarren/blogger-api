@@ -35,21 +35,6 @@ module.exports.routes = {
     'GET /v1/users/:id': 'UserController.getOne',
     // 'PUT /v1/users/:id': { blueprint: 'update' },
 
-    /**
-     * Group
-     *
-     * @desc The Group resource represents a shared asset which other data can be associated with.
-     * @docs http://docs.firstmate.apiary.io/reference/group
-     */
-
-    // Groups
-    // 'GET /v1/groups': { blueprint: 'find' },
-    // 'POST /v1/groups': { blueprint: 'create' },
-
-    // Group
-    'GET /v1/groups/:slug': { blueprint: 'findbyslug', model: 'group' },
-    // 'PUT /v1/groups/:id': { blueprint: 'update' },
-
 
     /**
      * Document
