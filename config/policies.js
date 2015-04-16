@@ -26,6 +26,9 @@ module.exports.policies = {
         'find': [ 'passport', 'isAuthenticated'],
         'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
         'destroy': [ 'passport', 'isAuthenticated', 'isOwner' ],
+    },
+    'PostController': {
+        'create': [ 'passport', 'isAuthenticated', 'useCurrentUser' ],
     }
 
 };
