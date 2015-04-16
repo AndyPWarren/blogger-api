@@ -36,8 +36,7 @@ var UserController = {
                     { 'firstName': { 'contains': name[0] }},
                     { 'lastName': { 'contains': name[0] || name[1] }}
                 ],
-                email: { 'contains': email },
-                group: req.param('group')
+                email: { 'contains': email }
             };
 
             User.find()

@@ -23,26 +23,9 @@ module.exports.policies = {
 
     'UserController': {
         'getOne': [ 'passport', 'isAuthenticated', 'isOwner' ],
-        'find': [ 'passport', 'isAuthenticated', 'restrictToGroup'],
+        'find': [ 'passport', 'isAuthenticated'],
         'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
         'destroy': [ 'passport', 'isAuthenticated', 'isOwner' ],
-    },
-    'GroupController': {
-        'findbyslug': true,
-        'create': [ 'passport', 'isAuthenticated', 'useCurrentUser' ],
-        'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
-        'delete': [ 'passport', 'isAuthenticated', 'isOwner' ]
-    },
-    'MessageController': {
-        'create': ['passport', 'isAuthenticated'],
-        'destroy': ['passport', 'isAuthenticated', 'isOwner'],
-        'update': ['passport', 'isAuthenticated', 'isOwner'],
-        'feed': ['passport', 'isAuthenticated', 'resourceBelongsToGroup' ]
-    },
-    'TopicController': {
-        'create': ['passport', 'isAuthenticated'],
-        'destroy': ['passport', 'isAuthenticated', 'isOwner'],
-        'update': ['passport', 'isAuthenticated', 'isOwner']
     }
 
 };

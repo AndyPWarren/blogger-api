@@ -14,7 +14,6 @@ var Action = module.exports = {
 
         action  : { type: 'string', required: true },
         author  : { model: 'user', required: true },
-        group   : { model: 'group', required: true },
         message : { type: 'string' },
         model   : { type: 'string', required: true }
 
@@ -33,8 +32,6 @@ var Action = module.exports = {
         AuditLog.create({
                 action: action,
                 author: author.id,
-                group: author.group,
-                message: message,
                 model: model
             })
             .then(function (model) {

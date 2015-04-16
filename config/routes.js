@@ -50,55 +50,6 @@ module.exports.routes = {
     'GET /v1/groups/:slug': { blueprint: 'findbyslug', model: 'group' },
     // 'PUT /v1/groups/:id': { blueprint: 'update' },
 
-    /**
-     * Message
-     *
-     * @desc The message resource provides chat features between users in a group
-     * @docs http://docs.firstmate.apiary.io/reference/message
-     */
-
-    // Messgaes
-    'GET /v1/messages/feed/:id': 'MessageController.feed',
-    'POST /v1/messages': 'MessageController.create',
-
-    /**
-     * Topic
-     *
-     * @desc The topic resource facilitates messages with everyone in the group.
-     * @docs http://docs.firstmate.apiary.io/reference/topics
-     */
-
-    // Topics
-    'POST /v1/topics': 'TopicController.create',
-    'GET /v1/topics': 'TopicController.groupTopics', //GET all topics associated with user's group
-    'GET /v1/topics/:id/messages': 'TopicController.topicMessages', //GET all messages in a specific topic where id = topic ID
-
-    /**
-     * Issue
-     *
-     * @desc The issue resource facilitates the logging and actioning of faults.
-     * @docs http://docs.firstmate.apiary.io/reference/issue
-     */
-
-    // Issues
-    'GET /v1/issues': 'IssueController.getAll',
-    'POST /v1/issues': 'IssueController.create',
-
-    // Issue
-    'GET /v1/issues/:id': 'IssueController.getOne',
-    'PUT /v1/issues/:id': 'IssueController.update',
-    'DELETE /v1/issues/:id': 'IssueController.destroy',
-
-    // Assign
-    'PUT /v1/issue/:id/assign': 'IssueController.assign',
-    'PUT /v1/issue/:id/unassign': 'IssueController.unAssign',
-
-    // Comments
-//    'POST /v1/issues/:id/comments': 'IssueController.comment',
-
-    // Comment
-//    'PUT /v1/issues/:id/comments/:id': 'IssueController.comment',
-//    'DELETE /v1/issues/:id/comments/:id': 'IssueController.comment',
 
     /**
      * Document
