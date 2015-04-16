@@ -38,11 +38,15 @@ module.exports = {
         lastLoginIp     : { type: 'string' },
         lastName        : { type: 'string', required: true },
         passports       : { collection: 'Passport', via: 'user' },
-        roles           : { type: 'json' },
 
         // Instance methods
         name        : function () {
             return this.firstName + ' ' + this.lastName;
+        },
+
+        site        : function () {
+            var siteArr = this.email.split("@");
+            return siteArr[1];
         },
 
         // Overrides the model object
@@ -51,6 +55,7 @@ module.exports = {
             delete user.passports;
 
             user.fullName = this.name();
+            user.siteName = this.site();
             return user;
         }
     }
