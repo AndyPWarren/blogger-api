@@ -1,11 +1,13 @@
 [{
     "activated": true,
     "createdAt": "2014-09-05T12:00:00+00:00",
-    "email": "gee@georginacope.co.uk",
-    "firstName": "Georgina",
+    "email": "pablo@swing.co.uk",
+    "firstName": "Pablo",
     "id": "1",
-    "lastName": "Cope",
-    "updatedAt": "2014-09-05T12:00:00+00:00"
+    "lastName": "Lanly",
+    "updatedAt": "2014-09-05T12:00:00+00:00",
+    "site": "1"
+
 },{
     "activated": true,
     "createdAt": "2014-09-05T15:00:00+00:00",
@@ -13,5 +15,16 @@
     "firstName": "John",
     "id": "2",
     "lastName": "Smith",
-    "updatedAt": "2014-09-05T15:00:00+00:00"
+    "updatedAt": "2014-09-05T15:00:00+00:00",
+    "site": "2"
+
+},{
+    "activated": true,
+    "createdAt": "2014-09-05T15:00:00+00:00",
+    "email": "dave@smith.co.uk",
+    "firstName": "Dave",
+    "id": "3",
+    "lastName": "Smith",
+    "updatedAt": "2014-09-05T15:00:00+00:00",
+    "site": "2"
 }]

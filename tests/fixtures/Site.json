@@ -1,0 +1,9 @@
+[{
+    "id": "1",
+    "domain": "lanly.co.uk",
+    "users": [1]
+},{
+    "id": "2",
+    "domain": "smith.co.uk",
+    "users": [2,3]
+}]

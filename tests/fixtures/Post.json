@@ -1,7 +1,11 @@
 [{
-    "title": "Gee's Post 1",
+    "title": "Post 1",
     "content": "this is my first post",
     "author": "1",
-    "id": "1",
-    "updatedAt": "2014-09-05T12:00:00+00:00"
+    "id": "1"
+},{
+    "title": "Welcome to smith.co.uk",
+    "content": "hi welcome to the smith site",
+    "author": "2",
+    "id": "2"
 }]

@@ -26,7 +26,7 @@ module.exports.bootstrap = function (cb) {
 
         // Fixtures are loaded gradually to ensure correct associations
         // User, group fixtures
-        barrels.populate(['user','group'], function(errUser) {
+        barrels.populate(['user','site'], function(errUser) {
 
             if (errUser) sails.log.error('Fixture Error: ' + errUser);
 
@@ -36,7 +36,7 @@ module.exports.bootstrap = function (cb) {
                 if (errPassport) sails.log.error('Fixture Error: ' + errPassport);
 
                 // Load more fixtures here if required
-                barrels.populate(['message']);
+                barrels.populate(['post']);
                 if (!errUser && !errPassport) sails.log.info('Fixtures loaded successfully.');
 
                 cb();
