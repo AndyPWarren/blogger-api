@@ -29,6 +29,10 @@ module.exports.policies = {
     },
     'PostController': {
         'create': [ 'passport', 'isAuthenticated', 'useCurrentUser' ],
+        'destroy': [ 'passport', 'isAuthenticated', 'isOwner' ],
+        'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
+        'getAll': [ 'hasDomain' ],
+        'getOne': [ 'hasDomain' ]
     }
 
 };
