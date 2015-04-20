@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
 
     // Enforce the owner parameter as the current user id
     if(req.user) {
-        req.body.owner = req.user.id;
+        req.body.author = req.user.id;
         return next();
     } else {
         sails.log.warn('Used "useCurrentUser" policy without enforcing authentication.');
