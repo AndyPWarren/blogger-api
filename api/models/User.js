@@ -34,6 +34,7 @@ module.exports = {
         avatar          : { type: 'url' },
         firstName       : { type: 'string', required: true },
         email           : { type: 'email', unique: true },
+        site            : { model: 'Site', required: true },
         lastLoginDate   : { type: 'datetime' },
         lastLoginIp     : { type: 'string' },
         lastName        : { type: 'string', required: true },
@@ -44,10 +45,7 @@ module.exports = {
             return this.firstName + ' ' + this.lastName;
         },
 
-        site        : function () {
-            var siteArr = this.email.split("@");
-            return siteArr[1];
-        },
+
 
         // Overrides the model object
         toJSON      : function () {
@@ -55,7 +53,7 @@ module.exports = {
             delete user.passports;
 
             user.fullName = this.name();
-            user.siteName = this.site();
+
             return user;
         }
     }
