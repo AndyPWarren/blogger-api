@@ -99,12 +99,9 @@
 
         // Sails Models
         "AuditLog"          : true,
-        "Issue"             : true,
-        "IssueTag"          : true,
-        "Message"           : true,
-        "Topic"             : true,
         "Passport"          : true,
         "User"              : true,
-        "Group"             : true
+        "Site"              : true,
+        "Post"              : true
     }
 }

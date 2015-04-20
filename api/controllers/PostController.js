@@ -27,7 +27,7 @@ var PostController = {
                             data: posts,
                             meta: meta
                         });
-                    })
+                    });
             });
     },
 
@@ -69,7 +69,7 @@ var PostController = {
                             return res.notFound(req.__('Response.404'));
                         }
 
-                    })
+                    });
             });
     }
 
