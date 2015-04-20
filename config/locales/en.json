@@ -18,5 +18,6 @@
     "Error.isOwner": "Action can only be performed by the owner.",
     "Error.Pagination.Invalid.Order": "Invalid order. Should be 'asc' or 'desc'.",
     "Error.Pagination.Invalid.Sort": "Invalid sort attribute. Check meta.sortBy for sortable attributes.",
-    "Error.User.Find.BadRequest": "At least \"name\" or \"email\" parmater is required to search users."
+    "Error.User.Find.BadRequest": "At least \"name\" or \"email\" parmater is required to search users.",
+    "Error.Domain.NotSet": "Please supply a domain"
 }
