@@ -15,6 +15,6 @@ module.exports = function(req, res, next) {
     if (req.param("domain")) {
         return next();
     } else {
-        return res.forbidden(req.__('Error.Domain.NotSet'));
+        return res.notFound(req.__('Error.Sites.Domain.Missing'));
     }
 };
