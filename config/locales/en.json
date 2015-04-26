@@ -10,6 +10,8 @@
     "Error.Passport.Username.Missing": "You need to supply a username",
     "Error.Passport.Password.Missing": "Oh no, you haven't set a password yet!",
     "Error.Passport.Generic": "Snap. Something went wrong with authorization.",
+    "Error.Passport.Site.Missing": "Please supply a site id",
+    "Error.Passport.Site.NotFound": "Site does not match the email address supplied",
     "Response.400": "Bad Request",
     "Response.403": "Not Authorised",
     "Response.403.Message": "You are not permitted to perform this action.",
@@ -19,5 +21,6 @@
     "Error.Pagination.Invalid.Order": "Invalid order. Should be 'asc' or 'desc'.",
     "Error.Pagination.Invalid.Sort": "Invalid sort attribute. Check meta.sortBy for sortable attributes.",
     "Error.User.Find.BadRequest": "At least \"name\" or \"email\" parmater is required to search users.",
-    "Error.Domain.NotSet": "Please supply a domain"
+    "Error.Sites.Domain.Missing": "Please supply a domain",
+    "Error.Sites.Domain.NotFound": "Site doesn't exist"
 }
