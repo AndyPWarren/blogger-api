@@ -1,9 +1,17 @@
 [{
     "id": "1",
-    "domain": "lanly.co.uk",
-    "users": [1]
+    "domain": "smith.com",
+    "users": [1,2]
 },{
     "id": "2",
-    "domain": "smith.co.uk",
-    "users": [2,3]
+    "domain": "bloggs.co.uk",
+    "users": [3]
+},{
+    "id": "3",
+    "domain": "davies.com",
+    "users": []
+},{
+    "id": "4",
+    "domain": "user.com",
+    "users": []
 }]

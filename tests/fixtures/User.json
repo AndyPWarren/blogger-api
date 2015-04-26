@@ -1,30 +1,29 @@
 [{
     "activated": true,
     "createdAt": "2014-09-05T12:00:00+00:00",
-    "email": "pablo@swing.co.uk",
-    "firstName": "Pablo",
+    "email": "john@smith.com",
+    "firstName": "John",
     "id": "1",
-    "lastName": "Lanly",
+    "lastName": "Smith",
     "updatedAt": "2014-09-05T12:00:00+00:00",
     "site": "1"
 
 },{
     "activated": true,
     "createdAt": "2014-09-05T15:00:00+00:00",
-    "email": "john@smith.co.uk",
-    "firstName": "John",
+    "email": "dave@smith.com",
+    "firstName": "Dave",
     "id": "2",
     "lastName": "Smith",
     "updatedAt": "2014-09-05T15:00:00+00:00",
-    "site": "2"
-
+    "site": "1"
 },{
     "activated": true,
     "createdAt": "2014-09-05T15:00:00+00:00",
-    "email": "dave@smith.co.uk",
-    "firstName": "Dave",
+    "email": "joe@bloggs.co.uk",
+    "firstName": "Joe",
     "id": "3",
-    "lastName": "Smith",
+    "lastName": "Bloggs",
     "updatedAt": "2014-09-05T15:00:00+00:00",
     "site": "2"
 }]
