@@ -27,7 +27,9 @@ exports.register = function (req, res, next) {
     var email     = req.param('email'),
         password  = req.param('password'),
         firstName = req.param('firstName'),
-        lastName  = req.param('lastName');
+        lastName  = req.param('lastName'),
+        siteId    = req.param('site');
+
 
     if (!email) {
         req.flash('error', req.__('Error.Passport.Email.Missing'));
@@ -39,41 +41,67 @@ exports.register = function (req, res, next) {
         return next(new Error('No password was entered.'));
     }
 
-    User.create({
-        email    : email,
-        firstName: firstName,
-        lastName : lastName
-    }, function (err, user) {
-        if (err) {
-            if (err.code === 'E_VALIDATION') {
-                if (err.invalidAttributes.email) {
-                    req.flash('error', req.__('Error.Passport.Email.Exists'));
+
+    if (siteId) {
+        Site.siteidSameAsEmail(email, siteId)
+            .then(function(site){
+                if (site === undefined){
+                    req.flash('error', req.__('Error.Passport.Site.NotFound'));
+                    return next(new Error("Site doesn't match email domain"));
                 } else {
-                    req.flash('error', req.__('Error.Passport.User.Exists'));
+                    User.create({
+                        email    : email,
+                        firstName: firstName,
+                        lastName : lastName,
+                        site     : siteId,
+                    }, function (err, user) {
+                        if (err) {
+                            if (err.code === 'E_VALIDATION') {
+                                if (err.invalidAttributes.site) {
+                                    req.flash('error', req.__('Error.Passport.Site.Missing'));
+                                } else {
+                                    if (err.invalidAttributes.email) {
+                                        req.flash('error', req.__('Error.Passport.Email.Exists'));
+                                    } else {
+                                        req.flash('error', req.__('Error.Passport.User.Exists'));
+                                    }
+                                }
+                            }
+
+                            return next(err);
+                        }
+
+                        Passport.create({
+                            protocol : 'local',
+                            password : password,
+                            user     : user.id
+                        }, function (err, passport) {
+                            if (err) {
+                                if (err.code === 'E_VALIDATION') {
+                                    req.flash('error', req.__('Error.Passport.Password.Invalid'));
+                                }
+
+                                return user.destroy(function (destroyErr) {
+                                    next(destroyErr || err);
+                                });
+                            }
+
+                            next(null, user);
+                        });
+                    });
                 }
-            }
 
-            return next(err);
-        }
+            });
+    } else {
 
-        Passport.create({
-            protocol : 'local',
-            password : password,
-            user     : user.id
-        }, function (err, passport) {
-            if (err) {
-                if (err.code === 'E_VALIDATION') {
-                    req.flash('error', req.__('Error.Passport.Password.Invalid'));
-                }
+        sails.log("error site not supplied");
+        req.flash('error', req.__('Error.Passport.Site.Missing'));
+        return next(new Error('No site id was supplied.'));
 
-                return user.destroy(function (destroyErr) {
-                    next(destroyErr || err);
-                });
-            }
+    }
 
-            next(null, user);
-        });
-    });
+
+
 };
 
 /**
