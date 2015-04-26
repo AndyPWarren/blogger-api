@@ -33,7 +33,7 @@ module.exports = function (grunt){
                     "<%= config.testDir %>**/*.js",
                     "<%= config.testDir %>**/**/*.js"
                 ],
-                tasks: ["test:spec"]
+                tasks: ["test:dev"]
             }
         },
 
@@ -53,7 +53,7 @@ module.exports = function (grunt){
                 coverageFolder: "<%= config.coverageDir %>",
                 reportFormats: ["cobertura","lcov"],
                 root: "api/",
-                timeout: 15000,
+                timeout: 30000,
                 mochaOptions: {
                     reporter: "spec",
                     growl: true,
