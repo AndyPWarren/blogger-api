@@ -83,14 +83,54 @@ describe('Authentication', function() {
      */
     describe('POST /v1/users/auth/local/register', function() {
 
-        it('should register user', function(done) {
+        it('should return an error when site id is not specified', function(done) {
+
+            var body = {
+                email: 'new@user.com',
+                password: 'password',
+                firstName: 'new',
+                lastName: 'user'
+            };
+
+            agent
+                .post('/v1/users/auth/local/register')
+                .send(body)
+                .expect(200, {
+                    'meta': {
+                        'errors': locales['Error.Passport.Site.Missing']
+                    }
+                }, done);
+        });
+
+        it('should return an error when site is not equal to the email address', function(done) {
 
             var body = {
                 email: 'new@user.com',
                 password: 'password',
                 firstName: 'new',
                 lastName: 'user',
-                group: 1
+                site: 3
+            };
+
+            agent
+                .post('/v1/users/auth/local/register')
+                .send(body)
+                .expect(200, {
+                    'meta': {
+                        'errors': locales['Error.Passport.Site.NotFound']
+                    }
+                }, done);
+        });
+
+
+        it('should register a user when site is equal to the email address', function(done) {
+
+            var body = {
+                email: 'new@user.com',
+                password: 'password',
+                firstName: 'new',
+                lastName: 'user',
+                site: 4
             };
 
             agent
@@ -105,6 +145,8 @@ describe('Authentication', function() {
                 .end(done);
 
         });
+
+
 
     });
 });

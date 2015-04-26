@@ -34,8 +34,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(400)
                 .expect(function(res){
-                    if (res.body.meta.message != locales['Error.User.Find.BadRequest']) return 'Expected meta.message to be \"' + locales['Error.User.Find.BadRequest'] + '\"';
-                })
+                if (res.body.meta.message != locales['Error.User.Find.BadRequest']) return 'Expected meta.message to be \"' + locales['Error.User.Find.BadRequest'] + '\"';
+            })
                 .end(done);
 
         });
@@ -50,8 +50,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.data.users[0].firstName !== name) return 'Expected ' + res.body.data.users[0].firstName + ' to equal ' + name;
-                })
+                if (res.body.data.users[0].firstName !== name) return 'Expected ' + res.body.data.users[0].firstName + ' to equal ' + name;
+            })
                 .end(done);
 
         });
@@ -66,8 +66,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.data.users[0].email !== email) return 'Expected ' + res.body.data.users[0].email + ' to equal ' + email;
-                })
+                if (res.body.data.users[0].email !== email) return 'Expected ' + res.body.data.users[0].email + ' to equal ' + email;
+            })
                 .end(done);
 
         });
@@ -80,12 +80,12 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.meta.sortBy.length === undefined) return 'No property meta.sortBy';
-                    var keys = ['totalItems', 'totalPages', 'itemsPerPage', 'currentPage'];
-                    keys.forEach(function(key){
-                        if (!res.body.meta.hasOwnProperty(key)) return "missing pagination meta";
-                    });
-                })
+                if (res.body.meta.sortBy.length === undefined) return 'No property meta.sortBy';
+                var keys = ['totalItems', 'totalPages', 'itemsPerPage', 'currentPage'];
+                keys.forEach(function(key){
+                    if (!res.body.meta.hasOwnProperty(key)) return "missing pagination meta";
+                });
+            })
                 .end(done);
 
         });
@@ -98,8 +98,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.meta.sorted !== 'lastName') return 'Unexpected sorted: ' + res.body.meta.sorted;
-                })
+                if (res.body.meta.sorted !== 'lastName') return 'Unexpected sorted: ' + res.body.meta.sorted;
+            })
                 .end(done);
 
         });
@@ -146,8 +146,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.data.user.email !==  member.identifier) return "Unexpected current user.";
-                })
+                if (res.body.data.user.email !==  member.identifier) return "Unexpected current user.";
+            })
                 .end(done);
 
         });
@@ -172,8 +172,8 @@ describe('User Resource as member', function() {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect(function(res){
-                    if (res.body.data.user.firstName !== 'Johnathan') return "User update failed";
-                })
+                if (res.body.data.user.firstName !== 'Johnathan') return "User update failed";
+            })
                 .end(done);
 
         });

@@ -34,7 +34,7 @@ describe('AuditLog Model', function() {
             'updatedAt',
             'action',
             'author',
-            'group',
+            'site',
             'message',
             'model'
         ]);
@@ -43,9 +43,9 @@ describe('AuditLog Model', function() {
 
     it('should make call to AuditLog.create on AuditLog.log', function() {
 
-        AuditLog.log("update", { id: 1, group: 1 }, "message", "An optional message");
+        AuditLog.log("update", { id: 1, site: 1 }, "message", "An optional message");
 
-        expect(auditLog.create).to.have.been.calledWith({ action: "update", author: 1, group: 1, model: "message", message: "An optional message" });
+        expect(auditLog.create).to.have.been.calledWith({ action: "update", author: 1, site: 1, model: "message", message: "An optional message" });
         expect(auditLog.publishCreate).to.have.been.calledWith({ id: 1 });
 
     });
