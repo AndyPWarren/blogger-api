@@ -35,6 +35,10 @@ module.exports.routes = {
     'GET /v1/users/:id': 'UserController.getOne',
     // 'PUT /v1/users/:id': { blueprint: 'update' },
 
+    // Site
+    'GET /v1/sites/:domain': 'SiteController.getOne',
+
+    // Posts
     'GET /v1/posts': 'PostController.getAll',
     'GET /v1/posts/:domain': 'PostController.getAll',
     'GET /v1/posts/:domain/:id': 'PostController.getOne',

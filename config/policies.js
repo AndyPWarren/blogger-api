@@ -25,7 +25,7 @@ module.exports.policies = {
         'getOne': [ 'passport', 'isAuthenticated', 'isOwner' ],
         'find': [ 'passport', 'isAuthenticated'],
         'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
-        'destroy': [ 'passport', 'isAuthenticated', 'isOwner' ],
+        'destroy': [ 'passport', 'isAuthenticated', 'isOwner' ]
     },
     'PostController': {
         'create': [ 'passport', 'isAuthenticated', 'useCurrentUser' ],
@@ -33,6 +33,12 @@ module.exports.policies = {
         'update': [ 'passport', 'isAuthenticated', 'isOwner' ],
         'getAll': [ 'hasDomain' ],
         'getOne': [ 'hasDomain' ]
+    },
+    'SiteController': {
+        'find': [ 'hasDomain' ],
+        'getOne': [ 'hasDomain' ],
+//        'create': [ 'isAdmin']
     }
+
 
 };
