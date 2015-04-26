@@ -13,15 +13,13 @@ describe('User Model', function() {
             'createdAt',
             'email',
             'firstName',
-            'group',
+            'site',
             'id',
-            'issues',
             'lastLoginDate',
             'lastLoginIp',
             'lastName',
             'name',
             'passports',
-            'roles',
             'toJSON',
             'updatedAt'
         ]);
@@ -67,28 +65,6 @@ describe('User Model', function() {
 
         expect(mockUser.passports).to.be.undefined();
 
-    });
-
-    it('should return false if user does not exist in group', function(done) {
-
-        var userId = 1,
-            groupId = 2;
-
-        User.isInGroup(userId, groupId).then(function(user){
-            expect(user).to.be.false;
-            done();
-        });
-    });
-
-    it('should return true if user exists in group', function(done) {
-
-        var userId = 2,
-            groupId = 1;
-
-        User.isInGroup(userId, groupId).then(function(user){
-            expect(user).to.be.true;
-            done();
-        });
     });
 
 });
