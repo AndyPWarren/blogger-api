@@ -16,7 +16,8 @@ Vagrant.configure("2") do |config|
         "/vagrant/config:/app/config",
         "/vagrant/tests:/app/tests",
         "/vagrant/coverage:/app/coverage",
-        "/vagrant/app.js:/app/app.js"
+        "/vagrant/app.js:/app/app.js",
+        "/vagrant/.tmp:/app/.tmp",
         ]
     end
   end
