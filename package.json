@@ -12,6 +12,7 @@
     "sails": "0.10.5",
     "sails-disk": "0.10.5",
     "skipper-disk": "0.5.4",
+    "bluebirdk": "2.9.25",
     "slug": "^0.8.0",
     "validator": "3.27.0"
   },
