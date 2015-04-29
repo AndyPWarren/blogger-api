@@ -58,8 +58,12 @@ var FileController = {
         return promiseFor(function(count) {
             return count < totalFiles;
         }, function(count) {
+            var fdSplit = files[count].fd.split("/app/assets/images/");
             return File.create({
-                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[count].filename),
+
+//                require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me),
+
+                imageUrl: require('util').format('%s/assets/images/%s', sails.getBaseUrl(), fdSplit[1]),
 
                 imageFd: files[count].fd,
 
@@ -91,29 +95,6 @@ var FileController = {
 
             return uploadResponse;
         });
-
-
-    },
-
-    uploadImagesEach: function(req, res) {
-
-//        req.file('image').upload({
-//            maxBytes: 1000000
-//        },function (err, files) {
-//
-//            console.log(files[0].fd);
-//            File.createEach(files, {
-//                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files.filename),
-//
-//                imageFd: files.fd,
-//
-//                title: files.filename
-//            }])
-//            .exec(function(err, files){
-//
-//            });
-//
-//        });
 
 
     },
