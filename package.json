@@ -11,6 +11,7 @@
     "passport-local": "1.0.0",
     "sails": "0.10.5",
     "sails-disk": "0.10.5",
+    "skipper-disk": "0.5.4",
     "slug": "^0.8.0",
     "validator": "3.27.0"
   },
