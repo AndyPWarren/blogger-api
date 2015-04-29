@@ -11,7 +11,7 @@ var Post = {
     attributes: {
         title       : {type: 'string', required: true},
         content     : {type: 'string', required: true},
-        image      : {model: 'File'},
+        images      : {collection: 'File', via: 'post'},
         author      : {model: 'User'},
 
     },

@@ -10,6 +10,7 @@ module.exports  = {
      * @type {Object}
      */
     attributes: {
+        post        : { model: 'Post'},
         imageUrl    : { type: 'url'},
         imageFd     : { type: 'string'},
         title       : { type: 'string'},
