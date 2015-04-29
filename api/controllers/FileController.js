@@ -58,12 +58,9 @@ var FileController = {
         return promiseFor(function(count) {
             return count < totalFiles;
         }, function(count) {
-            var fdSplit = files[count].fd.split("/app/assets/images/");
             return File.create({
 
-//                require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me),
-
-                imageUrl: require('util').format('%s/assets/images/%s', sails.getBaseUrl(), fdSplit[1]),
+                imageUrl: files[count].extra.Location,
 
                 imageFd: files[count].fd,
 
@@ -75,8 +72,6 @@ var FileController = {
             })
             .then(function(file) {
                 fileIds[count] = file.id;
-                console.log(file.id);
-                console.log(fileIds);
                 if (count === (totalFiles - 1)){
                     var uploadResponse = {
                         data: fileIds,

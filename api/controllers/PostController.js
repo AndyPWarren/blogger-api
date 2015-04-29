@@ -127,41 +127,43 @@ var PostController = {
             });
         };
 
-        //Find user site info
-        Site.findOne()
-            .where({id:req.user.site})
-            .then(function(site){
-                var domain = site.domain;
-                var userDir = domain + '/' + req.user.email;
-                //upload image
-                req.file('image').upload({
-                    maxBytes: 1000000,
-                    dirname: '../../assets/images/' + userDir
-                },function (err, files) {
-                    console.log(files);
-                    if (err) return res.serverError(err);
-                    if (files.length === 0) {
+        var S3_KEY = process.env.S3_KEY,
+            S3_SECRET = process.env.S3_SECRET,
+            S3_BUCKET = process.env.S3_BUCKET;
+
+
+        req.file('image').upload({
+            adapter: require('skipper-s3'),
+            key: S3_KEY,
+            secret: S3_SECRET,
+            bucket: S3_BUCKET
+        }, function (err, uploadedFiles) {
+
+
+            if (err) return res.negotiate(err);
+            if (uploadedFiles.length === 0) {
+                makePost(data);
+            } else {
+                fileCtrl.createFile(uploadedFiles)
+                    .then(function(uploadResponse){
+                    console.log(uploadResponse);
+                    if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === uploadedFiles.length) {
+
+                        //Add image id to the data object
+                        data.images = uploadResponse.data;
                         makePost(data);
-                    } else {
-                        fileCtrl.createFile(files)
-                            .then(function(uploadResponse){
-                            console.log(uploadResponse);
-                            if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === files.length) {
-
-                                //Add image id to the data object
-                                data.images = uploadResponse.data;
-                                makePost(data);
-                            }
-                            else {
-                                return res.serverError("files not uploaded correctly");
-                            }
-
-                        });
+                    }
+                    else {
+                        return res.serverError("files not uploaded correctly");
                     }
                 });
-            });
-
-
+            }
+//            return res.ok({
+//                files: uploadedFiles,
+//                textParams: req.params.all()
+//            });
+        });
+//
     },
 
 };
