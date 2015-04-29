@@ -43,6 +43,8 @@ config/local.js
 
 .vagrant
 
+Vagrantfile
+
 
 
 
