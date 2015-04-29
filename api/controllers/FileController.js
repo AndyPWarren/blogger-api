@@ -8,6 +8,7 @@
  * @module SiteController
  */
 var fileAdapter = require('skipper-disk')();
+var Promise = require('bluebird');
 
 var FileController = {
 
@@ -47,27 +48,48 @@ var FileController = {
     },
 
     createFile: function (files){
-        return File.create({
-            imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[0].filename),
+        var totalFiles = files.length;
+        var fileIds = [];
+        var promiseFor = Promise.method(function(condition, action, value) {
+            if (!condition(value)) return value;
+            return action(value).then(promiseFor.bind(null, condition, action));
+        });
 
-            imageFd: files[0].fd,
+        return promiseFor(function(count) {
+            return count < totalFiles;
+        }, function(count) {
+            return File.create({
+                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[count].filename),
 
-            title: files[0].filename,
+                imageFd: files[count].fd,
 
-            type: files[0].type,
+                title: files[count].filename,
 
-            size: files[0].size,
-        })
-        .then(function(file){
-            var fileStatus = {
-                data: file,
-                meta: {
-                    code: 200,
-                    message: files.length + ' file(s) uploaded successfully!'
+                type: files[count].type,
+
+                size: files[count].size,
+            })
+            .then(function(file) {
+                fileIds[count] = file.id;
+                console.log(file.id);
+                console.log(fileIds);
+                if (count === (totalFiles - 1)){
+                    var uploadResponse = {
+                        data: fileIds,
+                        meta: {
+                            code: 200,
+                            totalFiles: totalFiles
+                        }
+                    }
+                    return uploadResponse;
+                } else {
+                    return ++count;
                 }
-            }
-//            console.log(fileStatus)
-            return fileStatus;
+
+            });
+        }, 0).then(function(uploadResponse){
+
+            return uploadResponse;
         });
 
 
