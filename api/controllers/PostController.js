@@ -67,6 +67,7 @@ var PostController = {
                             var criteria = {author: users, id: reqId};
                             Post.findOne()
                                 .where(criteria)
+                                .populate('images')
                                 .then(function(posts){
                                     return [posts];
 
@@ -135,12 +136,13 @@ var PostController = {
                 makePost(data);
             } else {
                 fileCtrl.createFile(files)
-                    .then(function(files){
-                        if (files.meta.code === 200) {
+                    .then(function(uploadResponse){
+                        console.log(uploadResponse);
+                        if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === files.length) {
 
                             //Add image id to the data object
-                            data.image = files.data.id;
-                            makePost(data, files);
+                            data.images = uploadResponse.data;
+                            makePost(data);
                         }
                         else {
                             return res.serverError("files not uploaded correctly");
