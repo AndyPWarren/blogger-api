@@ -127,30 +127,40 @@ var PostController = {
             });
         };
 
-        //upload image
-        req.file('image').upload({
-            maxBytes: 1000000
-        },function (err, files) {
-            if (err) return res.serverError(err);
-            if (files.length === 0) {
-                makePost(data);
-            } else {
-                fileCtrl.createFile(files)
-                    .then(function(uploadResponse){
-                        console.log(uploadResponse);
-                        if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === files.length) {
+        //Find user site info
+        Site.findOne()
+            .where({id:req.user.site})
+            .then(function(site){
+                var domain = site.domain;
+                var userDir = domain + '/' + req.user.email;
+                //upload image
+                req.file('image').upload({
+                    maxBytes: 1000000,
+                    dirname: '../../assets/images/' + userDir
+                },function (err, files) {
+                    console.log(files);
+                    if (err) return res.serverError(err);
+                    if (files.length === 0) {
+                        makePost(data);
+                    } else {
+                        fileCtrl.createFile(files)
+                            .then(function(uploadResponse){
+                            console.log(uploadResponse);
+                            if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === files.length) {
 
-                            //Add image id to the data object
-                            data.images = uploadResponse.data;
-                            makePost(data);
-                        }
-                        else {
-                            return res.serverError("files not uploaded correctly");
-                        }
+                                //Add image id to the data object
+                                data.images = uploadResponse.data;
+                                makePost(data);
+                            }
+                            else {
+                                return res.serverError("files not uploaded correctly");
+                            }
 
-                    });
-            }
-        });
+                        });
+                    }
+                });
+            });
+
 
     },
 
