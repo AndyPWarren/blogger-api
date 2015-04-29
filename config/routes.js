@@ -42,6 +42,11 @@ module.exports.routes = {
     'GET /v1/posts': 'PostController.getAll',
     'GET /v1/posts/:domain': 'PostController.getAll',
     'GET /v1/posts/:domain/:id': 'PostController.getOne',
+    'POST /v1/posts': 'PostController.create',
+
+    // Files
+    'POST /v1/files': 'FileController.uploadImages',
+    'GET /v1/files/:id': 'FileController.file',
 
     /**
      * Document
