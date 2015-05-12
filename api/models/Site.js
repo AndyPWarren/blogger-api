@@ -24,8 +24,6 @@ module.exports = {
     beforeCreate: function(site, next){
 
         site.authorized = false;
-
-        console.log(site);
         next();
     },
 
@@ -76,6 +74,18 @@ module.exports = {
                 return site;
             });
 
+    },
+
+    isSiteAuthorized: function isSiteAuthorized(domain){
+        return Site.findOne()
+            .where({domain: domain})
+            .then(function(site){
+                if (site.authorized === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
     }
 
 };
