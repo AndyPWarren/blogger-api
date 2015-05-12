@@ -166,6 +166,56 @@ var PostController = {
 //
     },
 
+    delete: function (req, res) {
+
+        var destroyPost = function(req) {
+
+            var pk = ActionUtil.requirePk(req);
+
+            var query = Post.findOne(pk);
+            query = ActionUtil.populateEach(query, req);
+            query.exec(function foundRecord (err, record) {
+                if (err) return res.serverError(err);
+                if(!record) return res.notFound('No record found with the specified `id`.');
+
+                Post.destroy(pk).exec(function destroyedRecord (err) {
+                    if (err) return res.negotiate(err);
+
+                    if (sails.hooks.pubsub) {
+                        Post.publishDestroy(pk, !sails.config.blueprints.mirror && req, {previous: record});
+                        if (req.isSocket) {
+                            Post.unsubscribe(req, record);
+                            Post.retire(record);
+                        }
+                    }
+
+                    return res.ok(record);
+                });
+            });
+        };
+
+        var reqPostId = req.param("id");
+
+        var userId = req.user.id;
+
+        Post.findOne()
+            .where({id: reqPostId, author: userId})
+            .then(function(post){
+                if (post) {
+                    console.log(post);
+                    File.find()
+                        .where({id: post.images})
+                        .then(function(images){
+                            console.log(images);
+                        })
+                    //destroyPost(req);
+                } else {
+                    return res.notFound(req.__('Response.404'));
+                }
+            })
+
+    }
+
 };
 
 /**
