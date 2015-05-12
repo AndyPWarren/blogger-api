@@ -16,7 +16,7 @@ module.exports.routes = {
      * User
      *
      * @desc The user resource handles registration and authentication.
-     * @docs http://docs.firstmate.apiary.io/reference/user
+     * @docs http://docs.blogger-api.apiary.io/reference/user
      */
 
     // Users
@@ -35,9 +35,16 @@ module.exports.routes = {
     'GET /v1/users/:id': 'UserController.getOne',
     // 'PUT /v1/users/:id': { blueprint: 'update' },
 
-    // Site
+
+    /**
+     * Site
+     * the site resource handles domains that users belon
+     */
+    //Get all unauthorized sites for overload to approve
     'GET /v1/sites': 'SiteController.getAll',
+    //get individual site
     'GET /v1/sites/:domain': 'SiteController.getOne',
+    //authorize a site
     'GET /v1/sites/:domain/authorize': 'SiteController.authorize',
 
 
