@@ -15,6 +15,7 @@ describe('User Model', function() {
             'firstName',
             'site',
             'id',
+            'admin',
             'lastLoginDate',
             'lastLoginIp',
             'lastName',
