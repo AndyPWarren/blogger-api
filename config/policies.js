@@ -37,7 +37,8 @@ module.exports.policies = {
     'SiteController': {
         'find': [ 'hasDomain' ],
         'getOne': [ 'hasDomain' ],
-//        'create': [ 'isAdmin']
+        'getAll': [ 'passport', 'isAuthenticated', 'isAdmin' ],
+        'authorize': [ 'passport', 'isAuthenticated', 'isAdmin' ]
     }
 
 
