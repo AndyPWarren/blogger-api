@@ -16,8 +16,17 @@ module.exports = {
      * @type {Object}
      */
     attributes: {
-        users: { collection: 'User', via: 'site'},
-        domain: { type: 'string', required: true }
+        users:      { collection: 'User', via: 'site'},
+        domain:     { type: 'string', required: true },
+        authorized: { type: 'boolean' }
+    },
+
+    beforeCreate: function(site, next){
+
+        site.authorized = false;
+
+        console.log(site);
+        next();
     },
 
     doesSiteExist: function doesSiteExist(domain){
