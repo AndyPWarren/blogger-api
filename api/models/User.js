@@ -34,18 +34,17 @@ module.exports = {
         avatar          : { type: 'url' },
         firstName       : { type: 'string', required: true },
         email           : { type: 'email', unique: true },
-        site            : { model: 'Site', required: true },
+        site            : { model: 'Site' },
         lastLoginDate   : { type: 'datetime' },
         lastLoginIp     : { type: 'string' },
         lastName        : { type: 'string', required: true },
         passports       : { collection: 'Passport', via: 'user' },
+        admin           : { type: 'boolean', required: true, defaultsTo: false },
 
         // Instance methods
         name        : function () {
             return this.firstName + ' ' + this.lastName;
         },
-
-
 
         // Overrides the model object
         toJSON      : function () {
