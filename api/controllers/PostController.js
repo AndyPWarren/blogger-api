@@ -207,12 +207,12 @@ var PostController = {
                         .where({id: post.images})
                         .then(function(images){
                             console.log(images);
-                        })
+                        });
                     //destroyPost(req);
                 } else {
                     return res.notFound(req.__('Response.404'));
                 }
-            })
+            });
 
     }
 

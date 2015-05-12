@@ -8,49 +8,50 @@
  * @module SiteController
  */
 var fileAdapter = require('skipper-disk')();
-var Promise = require('bluebird');
+var promise = require('bluebird');
 
 var FileController = {
 
 
 
-    uploadImages: function uploadImages(req, res) {
-
-        return req.file('image').upload({
-            maxBytes: 1000000
-        },function (err, files) {
-            if (err) return res.serverError(err);
-            console.log(files);
-            return File.create({
-
-                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[i].filename),
-
-                imageFd: files[i].fd,
-
-                title: files[i].filename
-            })
-            .then(function (file){
-                sails.log(file);
-                return filesId[i] = file.id;
-
-            })
-            .catch(function(err){
-                if (err) return res.serverError(err);
-            });
-
-
-            res.json({
-                message: files.length + ' file(s) uploaded successfully!',
-                files: files
-            });
-
-        });
-    },
+//    uploadImages: function uploadImages(req, res) {
+//
+//        return req.file('image').upload({
+//            maxBytes: 1000000
+//        },function (err, files) {
+//            if (err) return res.serverError(err);
+//            console.log(files);
+//            return File.create({
+//
+//                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[i].filename),
+//
+//                imageFd: files[i].fd,
+//
+//                title: files[i].filename
+//            })
+//            .then(function (file){
+//                sails.log(file);
+//                filesId[i] = file.id;
+//                return filesId[i]
+//
+//            })
+//            .catch(function(err){
+//                if (err) return res.serverError(err);
+//            });
+//
+//
+//            res.json({
+//                message: files.length + ' file(s) uploaded successfully!',
+//                files: files
+//            });
+//
+//        });
+//    },
 
     createFile: function (files){
         var totalFiles = files.length;
         var fileIds = [];
-        var promiseFor = Promise.method(function(condition, action, value) {
+        var promiseFor = promise.method(function(condition, action, value) {
             if (!condition(value)) return value;
             return action(value).then(promiseFor.bind(null, condition, action));
         });
@@ -79,7 +80,7 @@ var FileController = {
                             code: 200,
                             totalFiles: totalFiles
                         }
-                    }
+                    };
                     return uploadResponse;
                 } else {
                     return ++count;

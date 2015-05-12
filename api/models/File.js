@@ -19,7 +19,7 @@ module.exports  = {
             type: 'string',
             isImage: function(cb) {
                 var typeSplit = this.type.split("/");
-                return cb(typeSplit[0])
+                return cb(typeSplit[0]);
             }
         }
     },

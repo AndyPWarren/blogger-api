@@ -102,6 +102,7 @@
         "Passport"          : true,
         "User"              : true,
         "Site"              : true,
-        "Post"              : true
+        "Post"              : true,
+        "File"              : true
     }
 }
