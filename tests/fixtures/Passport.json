@@ -10,4 +10,8 @@
     "password": "password",
     "protocol": "local",
     "user": 3
+},{
+    "password": "password",
+    "protocol": "local",
+    "user": 4
 }]

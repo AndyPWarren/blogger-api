@@ -6,7 +6,8 @@
     "id": "1",
     "lastName": "Smith",
     "updatedAt": "2014-09-05T12:00:00+00:00",
-    "site": "1"
+    "site": "1",
+    "admin": false
 
 },{
     "activated": true,
@@ -16,7 +17,8 @@
     "id": "2",
     "lastName": "Smith",
     "updatedAt": "2014-09-05T15:00:00+00:00",
-    "site": "1"
+    "site": "1",
+    "admin": false
 },{
     "activated": true,
     "createdAt": "2014-09-05T15:00:00+00:00",
@@ -25,5 +27,15 @@
     "id": "3",
     "lastName": "Bloggs",
     "updatedAt": "2014-09-05T15:00:00+00:00",
-    "site": "2"
+    "site": "2",
+    "admin": false
+},{
+    "activated": true,
+    "createdAt": "2014-09-05T15:00:00+00:00",
+    "email": "fat@controller.com",
+    "firstName": "fat",
+    "id": "4",
+    "lastName": "controller",
+    "updatedAt": "2014-09-05T15:00:00+00:00",
+    "admin": true
 }]
