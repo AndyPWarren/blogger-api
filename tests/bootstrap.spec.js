@@ -41,7 +41,7 @@ before(function(done) {
         fixtures = barrels.data;
         // Fixtures are loaded gradually to ensure correct associations
         // User, group fixtures
-        barrels.populate(['user'], function(errUser) {
+        barrels.populate(['user', 'site'], function(errUser) {
 
             if (errUser) sails.log.error('Fixture Error: ' + errUser);
 
@@ -50,10 +50,10 @@ before(function(done) {
 
                 if (errPassport) sails.log.error('Fixture Error: ' + errPassport);
 
-                barrels.populate(['site', 'post'], function(errSite){
+                barrels.populate(['post'], function(errPost){
 
                     // Load more fixtures here if required
-                    if (!errUser && !errPassport && !errSite) sails.log.info('Fixtures loaded proper.');
+                    if (!errUser && !errPassport && !errPost) sails.log.info('Fixtures loaded proper.');
 
                     done(err, sails);
 
