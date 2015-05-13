@@ -53,7 +53,7 @@ module.exports = function (grunt){
                 coverageFolder: "<%= config.coverageDir %>",
                 reportFormats: ["cobertura","lcov"],
                 root: "api/",
-                timeout: 30000,
+                timeout: 15000,
                 mochaOptions: {
                     reporter: "spec",
                     growl: true,
