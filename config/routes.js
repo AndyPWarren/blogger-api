@@ -9,8 +9,12 @@
 
 module.exports.routes = {
 
-    'GET /': 'IndexController.about',
-    'GET /v1': 'IndexController.about',
+//    'GET /': 'IndexController.about',
+//    'GET /v1': 'IndexController.about',
+
+    '/': {
+        view: 'homepage'
+    },
 
     /**
      * User
