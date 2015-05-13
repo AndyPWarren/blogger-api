@@ -6,7 +6,8 @@
 describe('Authentication', function() {
 
     var userFixture = require('../../fixtures/User.json'),
-        locales = require('../../../config/locales/en.json');
+        locales = require('../../../config/locales/en.json'),
+        authHelper = require('../authHelper.js');
 
     /**
      * Local Login
@@ -99,7 +100,8 @@ describe('Authentication', function() {
                     'meta': {
                         'errors': locales['Error.Passport.Site.Missing']
                     }
-                }, done);
+                })
+                .end(done);
         });
 
         it('should return an error when site is not equal to the email address', function(done) {
@@ -119,9 +121,9 @@ describe('Authentication', function() {
                     'meta': {
                         'errors': locales['Error.Passport.Site.NotFound']
                     }
-                }, done);
+                })
+                .end(done);
         });
-
 
         it('should register a user when site is equal to the email address', function(done) {
 
@@ -133,20 +135,22 @@ describe('Authentication', function() {
                 site: 4
             };
 
+            after(function(done){
+                authHelper.logout(done);
+            });
+
             agent
                 .post('/v1/users/auth/local/register')
                 .send(body)
                 .expect(200)
                 .expect(function(res){
-                    if(res.body.data.user.email != body.email) return "missing email";
-                    if(res.body.data.user.firstName != body.firstName) return "missing firstName";
-                    if(res.body.data.user.lastName != body.lastName) return "missing lastName";
+                    expect(res.body.data.user.email).to.equal(body.email);
+                    expect(res.body.data.user.site).to.equal(body.site);
                 })
                 .end(done);
 
         });
 
-
-
     });
+
 });
