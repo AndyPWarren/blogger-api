@@ -58,12 +58,12 @@ module.exports.routes = {
     'GET /v1/posts/:domain': 'PostController.getAll',
     'GET /v1/posts/:domain/:id': 'PostController.getOne',
     'POST /v1/posts': 'PostController.create',
-    'DELETE /v1/posts/:id': 'PostController.delete',
+    //'DELETE /v1/posts/:id': 'PostController.delete',
 
     // Files
     'POST /v1/files': 'FileController.uploadImages',
     'GET /v1/files/:id': 'FileController.file',
-    'DELETE /v1/files/:id': 'FileController.deleteFile',
+    //'DELETE /v1/files/:id': 'FileController.deleteFile',
 
     /**
      * Document
@@ -80,7 +80,6 @@ module.exports.routes = {
      */
     'GET /v1/actions': 'AuditLogController.find',
     'GET /v1/actions/:model': 'AuditLogController.find'
-
 
     // If a request to a URL doesn't match any of the custom routes above, it is matched
     // against Sails route blueprints.  See `config/blueprints.js` for configuration options
