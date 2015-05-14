@@ -10,7 +10,7 @@
 var fileAdapter = require('skipper-disk')();
 var promise = require('bluebird');
 
-var FileController = {
+var ImageController = {
 
 
 
@@ -124,4 +124,4 @@ var FileController = {
  * @property exports
  * @type {Object}
  */
-module.exports = FileController;
+module.exports = ImageController;

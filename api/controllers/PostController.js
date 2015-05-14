@@ -1,6 +1,6 @@
 'use strict';
 
-var fileCtrl = require('./FileController.js');
+var ImageCtrl = require('./ImageController.js');
 
 var PostController = {
 
@@ -127,6 +127,7 @@ var PostController = {
             });
         };
 
+
         var S3_KEY = process.env.S3_KEY,
             S3_SECRET = process.env.S3_SECRET,
             S3_BUCKET = process.env.S3_BUCKET;
@@ -144,7 +145,7 @@ var PostController = {
             if (uploadedFiles.length === 0) {
                 makePost(data);
             } else {
-                fileCtrl.createFile(uploadedFiles)
+                ImageCtrl.createFile(uploadedFiles)
                     .then(function(uploadResponse){
                     console.log(uploadResponse);
                     if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === uploadedFiles.length) {

@@ -10,7 +10,7 @@ describe('Index', function() {
         it('should provide information about the API', function(done) {
 
             agent
-                .get('/v1')
+                .get('/v1/about')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(200)
