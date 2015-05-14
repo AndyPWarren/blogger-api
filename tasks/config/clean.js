@@ -13,7 +13,9 @@ module.exports = function(grunt) {
 
 	grunt.config.set('clean', {
 		dev: ['.tmp/public/**'],
-		build: ['www']
+		build: ['www'],
+        docs: ["docs/js", "docs/api"],
+        test: ["coverage/", "xunit.xml"]
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
