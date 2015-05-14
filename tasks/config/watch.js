@@ -39,7 +39,10 @@ module.exports = function(grunt) {
                     'api/**/**/*.js',
                     'tests/*.js',
                     'tests/**/*.js',
-                    'tests/**/**/*.js'
+                    'tests/**/**/*.js',
+                    'tests/*.dev.js',
+                    'tests/**/*.dev.js',
+                    'tests/**/**/*.dev.js'
             ],
             tasks: ['test:dev']
 
