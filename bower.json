@@ -1,0 +1,16 @@
+{
+  "name": "blogger-overload",
+  "description": "Site controller for blogger api",
+  "version": "0.0.0",
+  "homepage": "https://bitbucket.org/spectrakey/...",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.0-rc.0",
+    "angular-route": "1.4.0-rc.0",
+    "angular-resource": "1.4.0-rc.0",
+    "bootstrap": "3.3.4"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.0-rc.0"
+  }
+}
