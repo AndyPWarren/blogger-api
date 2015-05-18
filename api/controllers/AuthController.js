@@ -20,6 +20,7 @@ var AuthController = {
      * @param {Object} res express response data
      */
     logout: function (req, res) {
+        req.session.authenticated = false;
         req.logout();
         ResponseService.send(req, res, { meta: { message: 'logout success' }});
     },
