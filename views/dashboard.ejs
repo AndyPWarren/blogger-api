@@ -1,0 +1,35 @@
+<section class="dashboard"ng-controller="DashboardController">
+    <div class="col-sm-6 col-sm-offset-3" ng-init="getUnauthorizedSites()">
+        <h2>Un-Authorised</h2>
+        <p ng-hide="$scope.allSitesUnauthorized">{{allSitesUnauthorized}}</p>
+        <div class="row site" ng-repeat="unauthorizedSite in unauthorizedSites">
+            <div class="col-xs-3">
+                {{unauthorizedSite.domain}}
+            </div>
+            <div class="col-xs-3">
+                {{unauthorizedSite.createdDate}}
+            </div>
+            <div class="col-xs-3">
+                {{unauthorizedSite.createdTime}}
+            </div>
+            <button type="submit" class="btn btn-success col-xs-3" ng-click="authorize(unauthorizedSite.domain)">Authorise</button>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3" ng-init="getAuthorizedSites()">
+        <h2>Authorised</h2>
+        <p ng-hide="$scope.allSitesAuthorized">{{allSitesAuthorized}}</p>
+        <div class="row site" ng-repeat="authorizedSite in authorizedSites">
+            <div class="col-xs-3">
+                {{authorizedSite.domain}}
+            </div>
+            <div class="col-xs-3">
+                {{authorizedSite.createdDate}}
+            </div>
+            <div class="col-xs-3">
+                {{authorizedSite.createdTime}}
+            </div>
+            <button type="submit" class="btn btn-danger col-xs-3" ng-click="unauthorize(authorizedSite.domain)">Un-authorise</button>
+        </div>
+    </div>
+</section>

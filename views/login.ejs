@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    </head>
-    <body>
-        <h1>The Login Page</h1>
-        <!--SCRIPTS-->
-        <script src="/js/dependencies/sails.io.js"></script>
-        <!--SCRIPTS END-->
-    </body>
-</html>
+<div class="col-md-3"></div>
+<div class="container-fluid col-md-6"  ng-controller="LoginController" >
+
+    <!--LOGIN FORM-->
+    <form name="loginForm" ng-submit="submitLoginForm()">
+        <div class="form-group col-md-12">
+
+            <!-- EMAIL -->
+            <label>Email address</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter email" ng-model="login.email" ng-required="true">
+            <span class="error-message" ng-show="loginForm.email.$dirty && loginForm.email.$error.required">Email is required</span>
+            <span class="error-message" ng-show="loginForm.email.$error.email">Not valid email!</span>
+        </div>
+
+        <!-- PASSWOORD -->
+        <div class="form-group col-md-12">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password" ng-model="login.password" ng-required="true">
+            <span class="error-message" ng-show="loginForm.password.$dirty && loginForm.password.$error.required">Password is required</span>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
+    </form>
+    <button type="submit" class="btn btn-default" ng-click="postAdmin()">admin</button>
+    <button type="submit" class="btn btn-default" ng-click="postUser()">john</button>
+</div>
+<div class="col-md-3"></div>
