@@ -5,8 +5,6 @@ var path = require('path');
 
 module.exports = function (grunt){
 
-    var devFiles = _.flatten(_.map(grunt.file.expand('./tests/**/*.spec.dev.js')));
-
     // Load the include-all library in order to require all of our grunt
     // configurations and task registrations dynamically.
     var includeAll;
