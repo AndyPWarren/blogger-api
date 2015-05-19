@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             constants: {
                 bower: "<%= bower %>",
                 pkg: "<%= pkg %>",
-                env: "<%= env %>"
+                ENV: "<%= env %>"
             }
         },
         dist: {}
