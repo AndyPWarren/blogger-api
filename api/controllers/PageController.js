@@ -20,7 +20,7 @@ module.exports = {
                     if (user.admin) {
                         return res.view('dashboard');
                     } else {
-                        return res.view('403');
+//                        return res.view('403');
                     }
                 });
 
