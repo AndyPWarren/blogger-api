@@ -4,37 +4,57 @@ angular.module('bloggerOverlord.dashboard', [
 
 ])
 
-.controller('DashboardController', ['$scope', '$http', function($scope, $http){
+.controller('DashboardController', ['$scope', '$http', 'splitTime', function($scope, $http, splitTime){
 
-    var splitTime = function(time) {
-        var timeDateStr = time.split('T'),
-            date = timeDateStr[0],
-            dateStr= date.split('-'),
-            year = dateStr[0],
-            month = dateStr[1],
-            day = dateStr[2],
-            timeStr = timeDateStr[1].split('.'),
-            time = timeStr[0];
 
-        var dateDMY = day + '-' + month + '-' + year;
-        return [dateDMY, time];
 
-    }
 
+    /**
+     * gets all sites that are unauthorized
+     * @returns {array}
+     */
     $scope.getUnauthorizedSites = function(){
+
         $http.get('/v1/sites/unauthorized')
         .then(function onSuccess(res){
             var sites = res.data.data.sites;
             $scope.allSitesUnauthorized = "";
 
+            /**
+             * change the createdAt response from API
+             * to something more readable
+             * @param {[[Type]]} var i=0; i<sites.length; i++
+             */
             for (var i=0; i<sites.length; i++) {
+
+                /**
+                 * send createAt string to time splitting function
+                 */
                 var newdateTime= splitTime(sites[i].createdAt);
+                /**
+                 * remove the createAt string from the site array
+                 */
                 delete sites[i].createdAt;
+                /**
+                 * add the new date string to the site array
+                 */
                 sites[i].createdDate = newdateTime[0];
+                /**
+                 * add the new time string to the site array
+                 */
                 sites[i].createdTime = newdateTime[1];
 
             }
+            /**
+             * set a scope variable to contain the sites array
+             */
             $scope.unauthorizedSites = sites;
+            /**
+             * check to see whether if all sites have
+             * been authorized and return message
+             * @param   {number}
+             * @returns {string}
+             */
             if (sites.length === 0) return $scope.allSitesUnauthorized = "All site have been authorised";
         })
         .catch(function onError(res){

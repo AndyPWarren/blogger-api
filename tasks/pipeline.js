@@ -27,10 +27,11 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
+  'js/dependencies/bower_components/angular/angular.js',
   'js/dependencies/bower_components/jquery/**/*.js',
-    'js/dependencies/**/*.js',
+  'js/dependencies/**/*.js',
   'js/app.js',
-  'js/public/login/LoginModule.js',
+  'js/components/login/LoginModule.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

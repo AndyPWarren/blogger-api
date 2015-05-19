@@ -29,16 +29,7 @@ angular.module('bloggerOverlord.user', [
         })
     };
 
-    $scope.logout = function(){
-        $http.get('/v1/users/logout')
-        .then(function onSuccess(res){
-            console.log(res);
-            window.location = '/'
-        })
-        .catch(function onError(res){
-            console.log(res);
-        });
-    };
+
 
     $scope.postUser = function(){
 
