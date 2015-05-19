@@ -1,9 +1,11 @@
 "use strict";
 
-angular.module('bloggerOverlord', [
+var bloggerOverlord = angular.module('bloggerOverlord', [
+    "bloggerOverlord.api",
     "bloggerOverlord.login",
     "bloggerOverlord.user",
-    "bloggerOverlord.dashboard"
+    "bloggerOverlord.dashboard",
+    "bloggerOverlord.nav"
 ])
 .controller('appController', ['$scope', '$http', function($scope, $http){
 
