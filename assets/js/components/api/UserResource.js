@@ -5,14 +5,15 @@
  **/
 angular.module("bloggerOverlord.api.user", ["ngResource"]).factory("UserResource", [
     "$resource",
+    "ENV",
     /**
      * @constructor
      * @param $resource {Service} angular resource service xhr wrapper for REST api's
      **/
-    function($resource) {
+    function($resource, ENV) {
 
         return $resource(
-            'http://localhost:1337/v1/users/:email',
+            ENV.API_ADDRESS + 'users/:email',
             {},
             {
                 get: {
@@ -22,15 +23,15 @@ angular.module("bloggerOverlord.api.user", ["ngResource"]).factory("UserResource
                 },
                 current: {
                     method: "GET",
-                    url: "http://localhost:1337/v1/users/current"
+                    url: ENV.API_ADDRESS + "users/current"
                 },
                 login: {
                     method: "POST",
-                    url: "http://localhost:1337/v1/users/auth/local"
+                    url: ENV.API_ADDRESS + "users/auth/local"
                 },
                 logout: {
                     method: "GET",
-                    url: "http://localhost:1337/v1/users/logout"
+                    url: ENV.API_ADDRESS + "users/logout"
                 }
             }
 
