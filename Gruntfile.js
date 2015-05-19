@@ -5,6 +5,12 @@ var path = require('path');
 
 module.exports = function (grunt){
 
+    var env = grunt.option("env") || "development";
+
+    grunt.initConfig({
+        env: grunt.file.readJSON("./env.json")[env],
+    });
+
     // Load the include-all library in order to require all of our grunt
     // configurations and task registrations dynamically.
     var includeAll;
