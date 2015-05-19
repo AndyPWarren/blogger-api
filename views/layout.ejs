@@ -58,8 +58,8 @@
 
             <%- body %>
 
-        <footer class="col-md-12" ng-controller="appController" ng-init="apiVersion()">
-            Blogger-API v: {{ version }}
+        <footer class="col-md-12" ng-controller="FooterController" ng-init="apiVersion()">
+            Blogger-API v: {{ apiVersion }}
         </footer>
 
         <!--[if lt IE 8]>
@@ -81,11 +81,15 @@
         <script src="/js/dependencies/bower_components/angular-resource/angular-resource.js"></script>
         <script src="/js/dependencies/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/js/app.js"></script>
+        <script src="/js/config/config.js"></script>
         <script src="/js/components/login/LoginModule.js"></script>
-        <script src="/js/components/bo-api/UserResource.js"></script>
-        <script src="/js/components/bo-api/api.js"></script>
-        <script src="/js/components/bo-api/timeSplitter.js"></script>
+        <script src="/js/components/api/UserResource.js"></script>
+        <script src="/js/components/api/api.js"></script>
+        <script src="/js/components/api/timeSplitter.js"></script>
+        <script src="/js/components/api/version.js"></script>
+        <script src="/js/components/cache/cacheFactory.js"></script>
         <script src="/js/components/dashboard/dashboard.js"></script>
+        <script src="/js/components/footer/FooterController.js"></script>
         <script src="/js/components/login/LoginController.js"></script>
         <script src="/js/components/nav/NavController.js"></script>
         <script src="/js/components/user/User.js"></script>

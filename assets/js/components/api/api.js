@@ -6,5 +6,6 @@
 angular.module("bloggerOverlord.api", [
     "bloggerOverlord.api.user",
     "bloggerOverlord.api.splitTime",
+    "bloggerOverlord.api.version",
     "ngResource"
 ]);
