@@ -30,7 +30,9 @@ var jsFilesToInject = [
   'js/dependencies/bower_components/angular/angular.js',
   'js/dependencies/bower_components/jquery/**/*.js',
   'js/dependencies/**/*.js',
+
   'js/app.js',
+  'js/config/config.js',
   'js/components/login/LoginModule.js',
 
   // All of the rest of your client-side js files
