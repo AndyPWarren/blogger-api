@@ -6,8 +6,8 @@ angular.module('bloggerOverlord.nav', [
 
 .controller('NavController', [
     '$scope',
-    'UserResource',
     '$window',
+    'UserResource',
 
     function($scope, $window, UserResource){
 
@@ -45,6 +45,7 @@ angular.module('bloggerOverlord.nav', [
              * get user from res
              * @param {Object} user
              */
+            console.log('on success called')
             var user = res.data.user;
             /**
              * get current user's name
@@ -75,7 +76,11 @@ angular.module('bloggerOverlord.nav', [
          * @method current user
          */
         $scope.currentUser = function currentUser() {
-            UserResource.current($scope.onCurrentUserSuccess(), $scope.onCurrentUserError);
+            console.log('current user function called')
+            UserResource.current($scope.onCurrentUserSuccess, $scope.onCurrentUserError);
+//            UserResource.current(function(res){
+//                console.log(res.data.user);
+//            })
         };
 
     }
