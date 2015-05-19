@@ -22,7 +22,19 @@
         <!-- SUBMIT -->
         <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
     </form>
-    <button type="submit" class="btn btn-default" ng-click="postAdmin()">admin</button>
-    <button type="submit" class="btn btn-default" ng-click="postUser()">john</button>
+    <span ng-show="userError">{{userError}}</span>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            login
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li><a ng-click="postAdmin('fat@controller.com')">admin</a></li>
+            <li><a ng-click="postAdmin('john@smith.com')">non admin</a></li>
+            <li><a ng-click="postAdmin('someone@doesntexist.com')">user doesnt exist</a></li>
+        </ul>
+    </div>
+
 </div>
 <div class="col-md-3"></div>
