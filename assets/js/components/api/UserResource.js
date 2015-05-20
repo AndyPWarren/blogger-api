@@ -9,6 +9,7 @@ angular.module("bloggerOverlord.api.user", ["ngResource"]).factory("UserResource
     /**
      * @constructor
      * @param $resource {Service} angular resource service xhr wrapper for REST api's
+     * @param ENV {Object} API address'
      **/
     function($resource, ENV) {
 
