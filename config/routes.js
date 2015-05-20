@@ -14,11 +14,7 @@ module.exports.routes = {
 
     'GET /': 'PageController.showDashboard',
 
-    '/dashboard': {
-        view: 'dashboard'
-    },
-
-
+    'GET /dashboard': 'PageController.showDashboard',
 
     /**
      * User
