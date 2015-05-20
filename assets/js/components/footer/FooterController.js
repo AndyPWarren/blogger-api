@@ -7,31 +7,38 @@ angular.module('bloggerOverlord.footer', [
 .controller('FooterController', [
     '$scope',
     'VersionResource',
-    'appCache',
+    /**
+     * @constructor
+     * @param {Object}   $scope          controller scope
+     * @param {Factory} VersionResource access version of API
+     */
+    function($scope, VersionResource){
 
-    function($scope, VersionResource, appCache){
-        $scope.apiVersion = function(){
+        /**
+         * get API version
+         * TODO save in local storage
+         */
+        $scope.apiVersion = function apiVersion(){
 
+            /**
+             * success callback
+             * @param {Object} res server response
+             */
             $scope.onVersionSuccess = function onVersionSuccess(res){
-                console.log(res.meta.version);
                 var version = res.meta.version;
-                appCache.put('appData', version);
-                $scope.apiVersion = appCache.get('appData');
+                $scope.apiVersion = version;
             };
 
-            $scope.onVersionError = function onVersionError(res){
+            /**
+             * error callback
+             * @param {Object} err server error response
+             */
+            $scope.onVersionError = function onVersionError(err){
+                console.log(err)
+            };
 
-            }
+            VersionResource.get($scope.onVersionSuccess, $scope.onVersionError);
 
-            var cache = appCache.get('appData')
-            console.log(cache);
-            if (cache) {
-                console.log("something in cache");
-                $scope.apiVersion = cache
-            } else {
-                console.log("cache is clear");
-                VersionResource.get($scope.onVersionSuccess, $scope.onVersionError)
-            }
         };
 
     }
