@@ -1,4 +1,8 @@
-angular.module('bloggerOverlord.login')
+"use strict";
+
+angular.module('bloggerOverlord.login', [
+
+])
 
 .controller('LoginController', [
     '$scope',
@@ -15,6 +19,12 @@ angular.module('bloggerOverlord.login')
          * submit login form details
          * @returns {string} error message
          */
+        $scope.clearUserError = function clearUserError() {
+            $scope.userError = "";
+            $scope.login.email = "";
+            $scope.login.password = "";
+
+        }
 
         $scope.submitLoginForm = function(){
 
