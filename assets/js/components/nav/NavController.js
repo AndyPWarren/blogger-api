@@ -8,8 +8,9 @@ angular.module('bloggerOverlord.nav', [
     '$scope',
     '$window',
     'UserResource',
+    'splitTime',
 
-    function($scope, $window, UserResource){
+    function($scope, $window, UserResource, splitTime){
 
         /**
          * on logout success callback
@@ -52,11 +53,7 @@ angular.module('bloggerOverlord.nav', [
              * @param {string} $scope.currentUser user's full name
              */
             $scope.currentUser = user.fullName;
-            /**
-             * get last login data
-             * @param {String} $scope.lastLoginDate
-             */
-            $scope.lastLoginDate = user.lastLoginDate;
+
         };
 
         /**
@@ -78,9 +75,6 @@ angular.module('bloggerOverlord.nav', [
         $scope.currentUser = function currentUser() {
             console.log('current user function called')
             UserResource.current($scope.onCurrentUserSuccess, $scope.onCurrentUserError);
-//            UserResource.current(function(res){
-//                console.log(res.data.user);
-//            })
         };
 
     }
