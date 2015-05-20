@@ -12,10 +12,9 @@ module.exports.routes = {
     'GET /about': 'IndexController.about',
     'GET /v1/about': 'IndexController.about',
 
-    '/': {
-        view: 'login'
-    },
+    'GET /': 'PageController.showDashboard',
 
+    'GET /dashboard': 'PageController.showDashboard',
 
     /**
      * User
@@ -37,7 +36,7 @@ module.exports.routes = {
     'GET /v1/users/logout': 'AuthController.logout',
 
     // User
-    'GET /v1/users/:id': 'UserController.getOne',
+    'GET /v1/users/:email': 'UserController.getOne',
     // 'PUT /v1/users/:id': { blueprint: 'update' },
 
 
@@ -45,12 +44,15 @@ module.exports.routes = {
      * Site
      * the site resource handles domains that users belon
      */
-    //Get all unauthorized sites for overload to approve
-    'GET /v1/sites': 'SiteController.getAll',
-    //get individual site
-    'GET /v1/sites/:domain': 'SiteController.getOne',
+    //Get all sites by authorized flag for overload to approve
+    'GET /v1/sites/authorized': 'SiteController.getAuthorized',
+    'GET /v1/sites/unauthorized': 'SiteController.getUnauthorized',
     //authorize a site
     'GET /v1/sites/:domain/authorize': 'SiteController.authorize',
+    //un-authorize a site
+    'GET /v1/sites/:domain/unauthorize': 'SiteController.unauthorize',
+    //get individual site
+    'GET /v1/sites/:domain': 'SiteController.getOne',
 
 
     // Posts

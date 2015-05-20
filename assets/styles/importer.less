@@ -16,15 +16,66 @@
 
 
 
-// For example:
 //
-// @import 'variables/colors.less';
-// @import 'mixins/foo.less';
-// @import 'mixins/bar.less';
-// @import 'mixins/baz.less';
-//
-// @import 'styleguide.less';
-// @import 'pages/login.less';
-// @import 'pages/signup.less';
-//
-// etc.
+// Main
+// --------------------------------------------------
+
+// Import less files from libraries such as bootstrap here
+
+@bootstrap-less: "../bower_components/bootstrap/less/";
+
+// Core variables and mixins
+@import "@{bootstrap-less}variables.less";
+@import "@{bootstrap-less}mixins.less";
+
+// Reset
+@import "@{bootstrap-less}normalize.less";
+@import "@{bootstrap-less}print.less";
+
+// Core CSS
+@import "@{bootstrap-less}scaffolding.less";
+@import "@{bootstrap-less}type.less";
+@import "@{bootstrap-less}code.less";
+@import "@{bootstrap-less}grid.less";
+@import "@{bootstrap-less}tables.less";
+@import "@{bootstrap-less}forms.less";
+@import "@{bootstrap-less}buttons.less";
+
+// Components
+@import "@{bootstrap-less}alerts.less";
+@import "@{bootstrap-less}badges.less";
+@import "@{bootstrap-less}navs.less";
+@import "@{bootstrap-less}navbar.less";
+@import "@{bootstrap-less}jumbotron.less";
+
+// Utility classes
+@import "@{bootstrap-less}utilities.less";
+@import "@{bootstrap-less}responsive-utilities.less";
+
+
+// Import less files specifically for app here
+
+//@import "default/core/variables.less";
+//@import "default/modules/jumbotron.less";
+//@import "default/modules/navbar.less";
+@import "login.less";
+@import "dashboard.less";
+
+
+// Import less files for large screen devices here
+// eg. device width > 1200px
+@media (min-width: @screen-lg-min) {
+
+}
+
+// Import less files for tablet sized devices here
+// eg. device width >= 768px and <= 1024px
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+
+}
+
+// Import less files for mobile sized devices here
+// eg. device width < 768px
+@media (max-width: @screen-xs-max) {
+
+}

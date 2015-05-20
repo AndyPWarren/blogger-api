@@ -83,7 +83,13 @@ var UserController = {
      */
     getOne: function (req, res) {
 
-        User.find(req.param('id'))
+        var email = req.param('email')
+
+        User.findOne()
+            .where({email: email})
+            .then(function(user){
+                return [user];
+            })
             .spread(function (model) {
                 if (!model) res.status(404);
                 return ResponseService.send(req, res, { data: model });
