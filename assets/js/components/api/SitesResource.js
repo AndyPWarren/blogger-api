@@ -1,7 +1,7 @@
 'use strict';
 /**
- * Factory which provides actions to perform on User resource end point
- * @class UserResource
+ * Factory which provides actions to perform on Sites resource end point
+ * @class SitesResource
  **/
 angular.module("bloggerOverlord.api.sites", ["ngResource"]).factory("SitesResource", [
     "$resource",
@@ -9,6 +9,7 @@ angular.module("bloggerOverlord.api.sites", ["ngResource"]).factory("SitesResour
     /**
      * @constructor
      * @param $resource {Service} angular resource service xhr wrapper for REST api's
+     * @param ENV {Object} API address'
      **/
     function($resource, ENV) {
 
@@ -16,11 +17,6 @@ angular.module("bloggerOverlord.api.sites", ["ngResource"]).factory("SitesResour
             ENV.API_ADDRESS + 'sites',
             {},
             {
-                get: {
-                    method: "GET",
-                    cache: false,
-                    isArray: false
-                },
                 getAuthorized: {
                     method: "GET",
                     url: ENV.API_ADDRESS + "sites/authorized"
