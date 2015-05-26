@@ -87,6 +87,7 @@ var UserController = {
 
         User.findOne()
             .where({email: email})
+            .populate('site')
             .then(function(user){
                 return [user];
             })
