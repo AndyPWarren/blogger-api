@@ -23,5 +23,6 @@
     "Error.User.Find.BadRequest": "At least \"name\" or \"email\" parmater is required to search users.",
     "Error.Sites.Domain.Missing": "Please supply a domain",
     "Error.Sites.Domain.NotFound": "Site doesn't exist",
-    "Error.Sites.NotAuthorized": "This site hasn't been authorized yet"
+    "Error.Sites.NotAuthorized": "This site hasn't been authorized yet",
+    "Error.Sites.Exists": "This site already exists"
 }

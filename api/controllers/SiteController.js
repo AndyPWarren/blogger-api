@@ -119,6 +119,52 @@ var SiteController = {
 
     },
 
+    create: function (req, res){
+        var reqDomain = req.param("domain");
+
+        Site.doesSiteExist(reqDomain)
+            .then(function(siteExists){
+                if (siteExists === false){
+                    var site = {
+                        domain: reqDomain
+                    };
+                    Site.create(site).exec(function created (err, newInstance) {
+
+                        // Differentiate between waterline-originated validation errors
+                        // and serious underlying issues. Respond with badRequest if a
+                        // validation error is encountered, w/ validation info.
+                        if (err) return res.negotiate(err);
+
+
+                        // If we have the pubsub hook, use the model class's publish method
+                        // to notify all subscribers about the created item
+                        if (req._sails.hooks.pubsub) {
+                            if (req.isSocket) {
+                                Post.subscribe(req, newInstance);
+                                Post.introduce(newInstance);
+                            }
+                            Post.publishCreate(newInstance, !req.options.mirror && req);
+                        }
+
+                        // (HTTP 201: Created)
+                        res.status(201);
+                        //                console.log(newInstance);
+                        //                postData = {
+                        //                    data: newInstance.toJson,
+                        //                    image: files.data
+                        //                }
+                        //                console.log(files);
+                        res.created(newInstance.toJSON());
+
+                    });
+                } else {
+                    // site already exists
+                    return res.badRequest(req.__('Error.Sites.Exists'));
+                }
+            });
+
+    }
+
 };
 
 /**
