@@ -16,6 +16,7 @@ var SiteController = {
 
         Site.findOne()
             .where({domain: reqDomain})
+            .populate('users')
             .then(function(site){
                 return [site];
             })
