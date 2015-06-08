@@ -60,17 +60,9 @@ var AuthController = {
             var flashError = req.flash('error')[0];
 
             if (err && !flashError) {
-                res.json({
-                    meta: {
-                        errors: req.__('Error.Passport.Generic')
-                    }
-                });
+                res.badRequest(req.__('Error.Passport.Generic'));
             } else if (flashError) {
-                res.json({
-                    meta: {
-                        errors: flashError
-                    }
-                });
+                res.badRequest(flashError);
             }
         }
 

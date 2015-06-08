@@ -25,11 +25,11 @@ describe('Authentication', function() {
                 .post('/v1/users/auth/local')
                 .send(credentials)
                 .expect('Content-Type', /json/)
-                .expect(200, {
-                    'meta': {
-                        'errors': locales['Error.Passport.Email.NotFound']
-                    }
-                }, done);
+                .expect(400)
+                .expect(function(res){
+                    expect(res.body.meta.errors).to.equal('That email doesn\'t seem right');
+                })
+                .end(done);
 
         });
 
