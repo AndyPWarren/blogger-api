@@ -83,7 +83,7 @@ var UserController = {
      */
     getOne: function (req, res) {
 
-        var email = req.param('email')
+        var email = req.param('email');
 
         User.findOne()
             .where({email: email})
