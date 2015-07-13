@@ -23,13 +23,11 @@ var SiteController = {
             .spread(function(site){
 
                 if (site !== undefined){
-                    if (site.authorized === false) {
-                        return res.forbidden(req.__('Error.Sites.NotAuthorized'));
-                    } else {
-                        return ResponseService.send(req, res, {
-                            data: site
-                        });
-                    }
+
+                    return ResponseService.send(req, res, {
+                        data: site
+                    });
+
                 } else {
                     return res.notFound(req.__('Response.404'));
                 }
@@ -149,12 +147,12 @@ var SiteController = {
 
                         // (HTTP 201: Created)
                         res.status(201);
-                        //                console.log(newInstance);
-                        //                postData = {
-                        //                    data: newInstance.toJson,
-                        //                    image: files.data
-                        //                }
-                        //                console.log(files);
+        //                console.log(newInstance);
+        //                postData = {
+        //                    data: newInstance.toJson,
+        //                    image: files.data
+        //                }
+        //                console.log(files);
                         res.created(newInstance.toJSON());
 
                     });
