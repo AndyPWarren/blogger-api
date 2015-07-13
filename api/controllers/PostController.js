@@ -21,17 +21,19 @@ var PostController = {
                         var criteria = {author: users};
                         Post.find()
                             .where(criteria)
+                            .populate('author')
                             .sort(sort)
+                            .paginate({limit: limit, page: page})
                             .then(function(posts){
-                            var meta = PaginationUtils.count(Post, page, limit, criteria);
-                            return [posts, meta];
-                        })
+                                var meta = PaginationUtils.count(Post, page, limit, criteria);
+                                return [posts, meta];
+                            })
                             .spread(function(posts, meta){
-                            return ResponseService.send(req, res, {
-                                data: posts,
-                                meta: meta
+                                return ResponseService.send(req, res, {
+                                    data: posts,
+                                    meta: meta
+                                });
                             });
-                        });
                     });
                 } else {
                     return res.notFound(req.__('Error.Sites.Domain.NotFound'));
