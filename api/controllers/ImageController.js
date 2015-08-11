@@ -4,119 +4,68 @@
  * A site represents a customer website which other data can be associated with. \
  * A user must have a membership with a site to enable interaction with blogs.
  *
- * API docs: http://docs.blogger.apiary.io/#reference/site
- * @module SiteController
+ * API docs: http://docs.blogger.apiary.io/#reference/image
+ * @module ImageController
  */
 var fileAdapter = require('skipper-disk')();
 var promise = require('bluebird');
 
+var S3_KEY = process.env.S3_KEY,
+    S3_SECRET = process.env.S3_SECRET,
+    S3_BUCKET = process.env.S3_BUCKET;
+
 var ImageController = {
 
+    uploadImages: function uploadImages(req, res) {
 
-
-//    uploadImages: function uploadImages(req, res) {
-//
-//        return req.file('image').upload({
-//            maxBytes: 1000000
-//        },function (err, files) {
-//            if (err) return res.serverError(err);
-//            console.log(files);
-//            return File.create({
-//
-//                imageUrl: require('util').format('%s/files/images/%s', sails.getBaseUrl(), files[i].filename),
-//
-//                imageFd: files[i].fd,
-//
-//                title: files[i].filename
-//            })
-//            .then(function (file){
-//                sails.log(file);
-//                filesId[i] = file.id;
-//                return filesId[i]
-//
-//            })
-//            .catch(function(err){
-//                if (err) return res.serverError(err);
-//            });
-//
-//
-//            res.json({
-//                message: files.length + ' file(s) uploaded successfully!',
-//                files: files
-//            });
-//
-//        });
-//    },
-
-    createFile: function (files){
-        var totalFiles = files.length;
-        var fileIds = [];
+        sails.log.debug("uploading...");
+        var imageIds = [];
         var promiseFor = promise.method(function(condition, action, value) {
             if (!condition(value)) return value;
             return action(value).then(promiseFor.bind(null, condition, action));
         });
+        req.file('image').upload({
+            adapter: require('skipper-s3'),
+            key: S3_KEY,
+            secret: S3_SECRET,
+            bucket: S3_BUCKET
+        }, function (err, images) {
+            promiseFor(function(count) {
+                return count < images.length;
+            }, function(count) {
+                return Image.create({
 
-        return promiseFor(function(count) {
-            return count < totalFiles;
-        }, function(count) {
-            return File.create({
+                    imageUrl: images[count].extra.Location,
 
-                imageUrl: files[count].extra.Location,
+                    imageFd: images[count].fd,
 
-                imageFd: files[count].fd,
+                    title: images[count].filename,
 
-                title: files[count].filename,
+                    type: images[count].type,
 
-                type: files[count].type,
+                    size: images[count].size,
+                })
+                .then(function(image) {
+                    imageIds[count] = image.id;
 
-                size: files[count].size,
-            })
-            .then(function(file) {
-                fileIds[count] = file.id;
-                if (count === (totalFiles - 1)){
-                    var uploadResponse = {
-                        data: fileIds,
-                        meta: {
-                            code: 200,
-                            totalFiles: totalFiles
-                        }
-                    };
-                    return uploadResponse;
-                } else {
-                    return ++count;
-                }
+                    if (count === (images.length - 1)){
+                        return imageIds
+                     } else {
+                        return ++count;
+                    }
 
+                });
+            }, 0).then(function(imageIds){
+                return ResponseService.send(req, res, {
+                    data: imageIds,
+                    meta: {
+                        code: 200,
+                        totalImages: images.length
+                    }
+                });
             });
-        }, 0).then(function(uploadResponse){
-
-            return uploadResponse;
-        });
-
-
-    },
-
-    file: function (req, res){
-
-        req.validate({
-            id: 'string'
-
-        });
-
-        File.findOne(req.param('id')).exec(function (err, file){
-            if (err) return res.negotiate(err);
-            if (!file) return res.notFound();
-
-            // Stream the file down
-            console.log(file.imageFd);
-            fileAdapter.read(file.imageFd)
-                .on('error', function (err){
-                return res.serverError(req.__('Response.500'));
-            })
-                .pipe(res);
         });
     }
-
-
 };
 
 

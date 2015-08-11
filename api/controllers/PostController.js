@@ -1,6 +1,37 @@
 'use strict';
 
 var ImageCtrl = require('./ImageController.js');
+var create = require('../blueprints/create.js');
+
+var S3_KEY = process.env.S3_KEY,
+    S3_SECRET = process.env.S3_SECRET,
+    S3_BUCKET = process.env.S3_BUCKET;
+
+var makePost = function (data, files, req) {
+    Post.create(data).exec(function created (err, newInstance) {
+
+        // Differentiate between waterline-originated validation errors
+        // and serious underlying issues. Respond with badRequest if a
+        // validation error is encountered, w/ validation info.
+        if (err) return res.negotiate(err);
+
+
+        // If we have the pubsub hook, use the model class's publish method
+        // to notify all subscribers about the created item
+        if (req._sails.hooks.pubsub) {
+            if (req.isSocket) {
+                Post.subscribe(req, newInstance);
+                Post.introduce(newInstance);
+            }
+            Post.publishCreate(newInstance, !req.options.mirror && req);
+        }
+
+        // (HTTP 201: Created)
+        res.status(201);
+        res.created(newInstance.toJSON());
+
+    });
+};
 
 var PostController = {
 
@@ -22,6 +53,7 @@ var PostController = {
                         Post.find()
                             .where(criteria)
                             .populate('author')
+                            .populate('images')
                             .sort(sort)
                             .paginate({limit: limit, page: page})
                             .then(function(posts){
@@ -89,84 +121,6 @@ var PostController = {
                     return res.notFound(req.__('Error.Sites.Domain.NotFound'));
                 }
             });
-    },
-
-    create: function (req, res) {
-
-        // Create data object (monolithic combination of all parameters)
-        // Omit the blacklisted params (like JSONP callback param, etc.)
-        var data = ActionUtil.parseValues(req);
-
-        var makePost = function(data, files) {
-            Post.create(data).exec(function created (err, newInstance) {
-
-                // Differentiate between waterline-originated validation errors
-                // and serious underlying issues. Respond with badRequest if a
-                // validation error is encountered, w/ validation info.
-                if (err) return res.negotiate(err);
-
-
-                // If we have the pubsub hook, use the model class's publish method
-                // to notify all subscribers about the created item
-                if (req._sails.hooks.pubsub) {
-                    if (req.isSocket) {
-                        Post.subscribe(req, newInstance);
-                        Post.introduce(newInstance);
-                    }
-                    Post.publishCreate(newInstance, !req.options.mirror && req);
-                }
-
-                // (HTTP 201: Created)
-                res.status(201);
-//                console.log(newInstance);
-//                postData = {
-//                    data: newInstance.toJson,
-//                    image: files.data
-//                }
-//                console.log(files);
-                res.created(newInstance.toJSON());
-
-            });
-        };
-
-
-        var S3_KEY = process.env.S3_KEY,
-            S3_SECRET = process.env.S3_SECRET,
-            S3_BUCKET = process.env.S3_BUCKET;
-
-
-        req.file('image').upload({
-            adapter: require('skipper-s3'),
-            key: S3_KEY,
-            secret: S3_SECRET,
-            bucket: S3_BUCKET
-        }, function (err, uploadedFiles) {
-
-
-            if (err) return res.negotiate(err);
-            if (uploadedFiles.length === 0) {
-                makePost(data);
-            } else {
-                ImageCtrl.createFile(uploadedFiles)
-                    .then(function(uploadResponse){
-                    console.log(uploadResponse);
-                    if (uploadResponse.meta.code === 200 && uploadResponse.meta.totalFiles === uploadedFiles.length) {
-
-                        //Add image id to the data object
-                        data.images = uploadResponse.data;
-                        makePost(data);
-                    }
-                    else {
-                        return res.serverError("files not uploaded correctly");
-                    }
-                });
-            }
-//            return res.ok({
-//                files: uploadedFiles,
-//                textParams: req.params.all()
-//            });
-        });
-//
     },
 
     delete: function (req, res) {
