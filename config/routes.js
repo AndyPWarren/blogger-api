@@ -54,18 +54,15 @@ module.exports.routes = {
     //get individual site
     'GET /v1/sites/:domain': 'SiteController.getOne',
 
-
     // Posts
     'GET /v1/posts': 'PostController.getAll',
     'GET /v1/posts/:domain': 'PostController.getAll',
     'GET /v1/posts/:domain/:id': 'PostController.getOne',
-    'POST /v1/posts': 'PostController.create',
-    //'DELETE /v1/posts/:id': 'PostController.delete',
+    'PUT /v1/posts/:id': 'PostController.update',
+
 
     // Files
-    'POST /v1/files': 'FileController.uploadImages',
-    'GET /v1/files/:id': 'FileController.file',
-    //'DELETE /v1/files/:id': 'FileController.deleteFile',
+    'POST /v1/files': 'ImageController.uploadImages',
 
     /**
      * Document
