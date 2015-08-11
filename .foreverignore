@@ -1,4 +1,7 @@
+
 .tmp/**
 coverage/**
 tests/**
 views/**
+
+/app/assets/js/config/config.js
