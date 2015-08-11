@@ -1,21 +1,13 @@
-# First Mate [![Build Status](https://api.shippable.com/projects/54727940d46935d5fbbe5fb0/badge?branchName=develop)](https://app.shippable.com//builds/latest)
+# Multisite-blogger
 
-This is the project repository for the First Mate core application. This package provides:
+This is the project repository for the Multisite-blogger core application. This package provides:
 
 * API services
 
 
-## Developing ##
-
-Ensure you have the following tools before you start developing this application:
-
-* [NodeJS](http://nodejs.org/)
-* Grunt `sudo npm install grunt -g`
-* [Git Flow](https://github.com/nvie/gitflow)
-
 ### Docker
 
-The First Mate API is designed to be run under docker. This section will describe how to get the application up and running under docker.
+The Multisite-blogger API is designed to be run under docker. This section will describe how to get the application up and running under docker.
 
 #### Building the Docker Image
 
@@ -23,13 +15,11 @@ First step is to get docker installed on your system. You will need to use Boot2
 
 https://docs.docker.com/installation/#installation
 
-Once you have docker running the first thing to do is build the docker image. In future we may host the latest image build on docker hub or similar.
-
-    $ docker build -t spectrakey/firstmate-api:develop .
+Once you have docker running the first thing to do is build the docker image.
 
 #### Running the Application
 
-    $ docker run --rm -it spectrakey/firstmate-api:develop
+    $ docker run --rm -it spectrakey/blogger-api:develop
 
 #### Running in Development
 
@@ -60,7 +50,7 @@ The following instructions will:
 
 
 1. Open command prompt as an adminstrator
-2. `cd` into the root directory of the firstmate-api repo
+2. `cd` into the root directory of the blogger-api repo
 3. Run `vagrant up --provider=docker`
 4. Check it out at [http://localhost:1337](http://localhost:1337)
 
@@ -114,11 +104,5 @@ If you are using vagrant;
 
 See the [testing README](./tests/README.md) for more information regarding the test suites.
 
-## Documentation
 
-Our code docs are based on [JSdoc notations](http://usejsdoc.org/), browseable code docs are generated in `./docs/js` and API docs in `./docs/api` by running:
-
-    $ grunt docs
-
-We also maintain API documentation at http://docs.firstmate.apiary.io
 
