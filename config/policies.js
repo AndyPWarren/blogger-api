@@ -40,6 +40,9 @@ module.exports.policies = {
         'getUnauthorized': [ 'passport', 'isAuthenticated', 'isAdmin' ],
         'authorize': [ 'passport', 'isAuthenticated', 'isAdmin' ],
         'unauthorize': [ 'passport', 'isAuthenticated', 'isAdmin' ]
+    },
+    'ImageController': {
+        'uploadImages': ['passport', 'isAuthenticated']
     }
 
 
